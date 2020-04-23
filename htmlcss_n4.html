@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #JavaScript_and_Java {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        body {
+            display: flex;
+            margin: 0px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        @media (max-width: 800px) {
+            body {
+                flex-direction: column;
+            }
+            #navbar {
+                width: 100vw;
+                position:relative
+            }
+            main {
+                margin-top: 100vw;
+            }
+        }
+        @media (min-width: 800px) {
+            body {
+                flex-direction: row;
+            }
+            #navbar {
+                width: 300px;
+                position: fixed;
+            }
+            main {
+                margin-left: 300px;
+            }
+        }
+        #navbar {
+            background-color: rgba(144, 188, 233, 0.2);
+            height: 100vh;  
+            
+        }
+
+        #navbar li {
+            list-style-type: none;
+            margin-left: 0;
+            font-size: 14pt;
+            padding-top: 3px;
+            padding-bottom: 1px;
+            border-bottom: 1px solid rgba(144, 188, 233, 0.8);
+        }
+        #navbar ul {
+            padding: 0;
+        }
+        #navbar a {
+           padding-left: 20px
+        }
+        #navbar header {
+            font-size: 20pt;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #main-doc {
+            margin-top: 20px;
+        }
+
+        .main-section {
+            padding: 20px 0 10px 30px;
+            border-bottom: 1px solid;
+
+        }
+        .main-section code {
+            background-color: hsla(234, 79%, 45%, 0.123);
+            padding: 10px 30px 10px 30px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .main-section header {
+            font-size: 26pt;
+        }
+        .main-section:last-child {
+            border-bottom: none
+        }
+    </style>
+</head>
+<body>
+  
+    <nav id="navbar">
+        <header>Menu</header>
+        <ul>
+            <li><a class="nav-link" href="#JavaScript_and_Java">JavaScript and Java</a></li>
+            <li><a class="nav-link" href="#C_#">C #</a></li>
+            <li><a class="nav-link" href="#Python">Python</a></li>
+            <li><a class="nav-link" href="#Swift">Swift</a></li>
+            <li><a class="nav-link" href="#Golang">Golang</a></li>
+            <li><a class="nav-link" href="#C++">C++</a></li>
+            <li><a class="nav-link" href="#Authors">Authors</a></li>
+        </ul> 
+
+    </nav>
+    <main id="main-doc">
+
+
+        <section class="main-section" id="JavaScript_and_Java">
+            <header>JavaScript and Java</header>
+            <article>
+                <p>
+                  JavaScript and Java are similar in some ways but fundamentally different
+                  in some others. The JavaScript language resembles Java but does not have
+                  Java's static typing and strong type checking. JavaScript follows most
+                  Java expression syntax, naming conventions and basic control-flow
+                  constructs which was the reason why it was renamed from LiveScript to
+                  JavaScript.
+                </p>
+          
+                <p>
+                  In contrast to Java's compile-time system of classes built by
+                  declarations, JavaScript supports a runtime system based on a small
+                  number of data types representing numeric, Boolean, and string values.
+                  JavaScript has a prototype-based object model instead of the more common
+                  class-based object model. The prototype-based model provides dynamic
+                  inheritance; that is, what is inherited can vary for individual objects.
+                  JavaScript also supports functions without any special declarative
+                  requirements. Functions can be properties of objects, executing as
+                  loosely typed methods.
+                </p>
+                <code>
+                    require('dotenv').config();
+                    const express = require('express')
+                    const consola = require('consola')
+                    const mongoose = require('mongoose')
+                    const items=require('../server/models/catalog')
+                    const { Nuxt, Builder } = require('nuxt')
+                    const app = express()
+                    const mongouser = process.env.MONGO_USER, mongopass = process.env.MONGO_PASS
+                    
+                    // Import and Set Nuxt.js options
+                    const config = require('../nuxt.config.js')
+                    config.dev = process.env.NODE_ENV !== 'production'
+                    
+                    async function start() {
+                      // Init Nuxt.js
+                      const nuxt = new Nuxt(config)
+                    
+                      const { host, port } = nuxt.options.server
+                    
+                      // Build only in dev mode
+                      if (config.dev) {
+                        const builder = new Builder(nuxt)
+                        await builder.build()
+                      } else {
+                        await nuxt.ready()
+                      }
+                    
+                      // Connect MongoDB
+                      
+                      console.log(mongouser,mongopass)
+                      try {
+                        await mongoose.connect(
+                          `mongodb+srv://${mongouser}:${mongopass}@omennuxt-bp3za.mongodb.net/wears`,
+                          {
+                            useNewUrlParser: true,
+                            useUnifiedTopology: true
+                          }
+                        )
+                      } catch (e) { console.log(e) }
+                    
+                      app.get('/api/getcatalog', async (req, res, next) => {
+                        //console.log('TEST')
+                        //let wears = await
+                      })
+                    
+                      // Give nuxt middleware to express
+                      app.use(nuxt.render)
+                    
+                      // Listen the server
+                      app.listen(port, host)
+                      consola.ready({
+                        message: `Server listening on http://${host}:${port}`,
+                        badge: true
+                      })
+                    }
+                    start()
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="C_#">
+            <header>C #</header>
+            <article>
+                <ul>
+                    <li>
+                        Индексаторы могут использовать params параметры
+                    </li>
+                    <li>
+                        Строковые литералы, определенные в вашем коде хранятся в единственном экземпляре
+                    </li>
+                    <li>
+                        Переменные в методах могут иметь область видимости ограниченную фигурными скобками
+                    </li>
+                </ul>
+                <code>
+                    enum Duration { Day, Week, Month };
+static class DurationExtensions
+ {
+   public static DateTime From(this Duration duration, DateTime dateTime)
+    {
+     switch (duration)
+      {
+         case Duration.Day: return dateTime.AddDays(1);
+         case Duration.Week: return dateTime.AddDays(7);
+         case Duration.Month: return dateTime.AddMonths(1);
+         default: throw new ArgumentOutOfRangeException("duration");
+        }
+    }
+ }
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="C++">
+            <header>C++</header>
+            <article>
+                <p>C++ (читается си-плюс-плюс) — компилируемый, статически типизированный язык программирования общего назначения.</p>
+                <p>Поддерживает такие парадигмы программирования, как процедурное программирование, объектно-ориентированное программирование, обобщённое программирование. Язык имеет богатую стандартную библиотеку, которая включает в себя распространённые контейнеры и алгоритмы, ввод-вывод, регулярные выражения, поддержку многопоточности и другие возможности. C++ сочетает свойства как высокоуровневых, так и низкоуровневых языков. В сравнении с его предшественником — языком C, — наибольшее внимание уделено поддержке объектно-ориентированного и обобщённого программирования.</p>
+                <code>
+                    namespace fs = boost::filesystem; 
+fs::path myPath( strPath, fs::native );
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="Python">
+            <header>Python</header>
+            <article>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dignissimos voluptate quisquam in, provident illum sit nesciunt aspernatur, eius temporibus soluta facere.</p>
+                <p></p>
+                <ul>
+                    <li>
+                        Python работает практически везде
+                    </li>
+                    <li>
+                        Python совместим с .NET и Java Virtual Machine
+                    </li>
+                    <li>
+                        Название Python произошло не от рептилии
+                    </li>
+                </ul>
+                <code>
+                    import telebot
+                    from os import environ
+                    import params
+
+                    bot = telebot.TeleBot(environ['token'])
+
+                    @bot.message_handler(commands=['help'])
+                    def help_handler(message):
+                        keyboard_start = telebot.types.InlineKeyboardMarkup()
+                        callback_button = telebot.types.InlineKeyboardButton(text='Начать', callback_data="")
+                        keyboard_start.add(callback_button)
+                        bot.send_message(message.from_user.id, params.help_message)
+
+
+                    @bot.message_handler(commands=['sources'])
+                    def sources_handler(message):
+                        keyboard_url = telebot.types.InlineKeyboardMarkup()  # resize_keyboard="False"
+                        callback_button_vk = telebot.types.InlineKeyboardButton(url="https://vk.com/omenboyzapparel", text='ВК')
+                        callback_button_inst = telebot.types.InlineKeyboardButton(url="https://instagram.com/omenboyz", text='Inst')
+                        callback_button_instcustom = telebot.types.InlineKeyboardButton(url="https://vk.com/omenboyzcustoms",
+                                                                                        text='ВК Custom')
+                        callback_button_vkcustom = telebot.types.InlineKeyboardButton(url="https://instagram.com/omenboyzcustoms",
+                                                                                    text='Inst Custom')
+                        keyboard_url.add(callback_button_vk, callback_button_vkcustom,
+                                        callback_button_instcustom, callback_button_inst)
+                        print(message.chat.first_name)
+                        bot.send_message(message.from_user.id, 'Ниже представлены наши сети, тебя там ждут :)', reply_markup=keyboard_url)
+
+
+
+
+
+                    # except Exception as error:
+                    #     print("Excepcion in forward handler. Info: {}".format(error))
+                    @bot.message_handler(content_types=['text'])  # Старт бота для сообщений
+                    def text_handler(message):
+                        # try:
+                        #    return
+                        if message.text == "/config":
+                            bot.reply_to(message, 'Начала конфигуратора')
+                            return
+
+
+
+                    if __name__ == '__main__':
+                        bot.polling(none_stop=True)
+                </code>
+                
+            </article>
+        </section>
+        <section class="main-section" id="Golang">
+            <header>
+                Golang
+            </header>
+            <article>
+                <p>Golang, или Go — язык программирования, начало которого было положено в 2007 году сотрудниками компании Google: Робертом Гризмером, Робом Пайком и Кеном Томпсоном.</p>
+                <p>Go поддерживает типобезопасность, возможность динамического ввода данных, а также содержит богатую стандартную библиотеку функций и встроенные типы данных вроде массивов с динамическим размером и ассоциативных массивов.</p>
+                <code>
+                    package main
+
+import "fmt"
+
+type Vertex struct {
+    X int
+    Y int
+}
+
+func main() {
+    v := Vertex{1, 2}
+    v.X = 4
+    fmt.Println(v.X)
+}
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="Swift">
+            <header>
+                Swift
+            </header>
+            <article>
+                <p>Swift – это новый язык программирования для разработки iOS и OS X приложений, который сочетает в себе все лучшее от C и Objective-C, но лишен ограничений, накладываемых в угоду совместимости с C. В Swift используются паттерны безопасного программирования и добавлены современные функции, превращающие создание приложения в простой, более гибкий и увлекательный процесс. Swift, созданый нами с чистого листа, – это возможность заново представить себе, как разрабатываются приложения.</p>
+                <p>Swift разрабатывался нами несколько лет. Основой нового языка программирования послужили существующие компилятор, отладчик и фреймворки. Мы упростили процесс управления памятью с помощью механизма автоматического подсчета ссылок – Automatic Reference Counting (ARC). Наши фреймворки также подверглись серьезной модернизации. Objective-C начал поддерживать блоки, литералы и модули – все это создало благоприятные условия для внедрения современных технологий. Именно эта подготовительная работа послужила фундаментом для нового языка программирования, который будет применяться для разработки будущих программных продуктов для Apple.</p>
+                <code>
+                    //
+// proSwift.ru
+//
+// Swift 4
+
+import UIKit
+
+class PopUpViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+                </code>
+            </article>
+        </section>
+        <section class="main-section" id="Authors">
+            <header>
+                Authors
+            </header>
+            <article>
+                <p>    Тексты взяты из открытых источников, таких как habrhabr, tproger, freecodecamp, xakep, wikipedia</p>
+            </article>
+        </section>
+    </main>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
